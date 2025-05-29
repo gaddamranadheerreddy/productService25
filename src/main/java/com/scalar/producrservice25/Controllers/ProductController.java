@@ -21,11 +21,11 @@ public class ProductController {
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
         Product product = productService.getSingleProduct(id);
 
-//        return new ResponseEntity<>(
-//                product,
-//                HttpStatus.FOUND//.NOT_FOUND //.ACCEPTED
-//        );
-        throw new RuntimeException("Something went Wrong!!");
+        return new ResponseEntity<>(
+                product,
+                HttpStatus.FOUND//.NOT_FOUND //.ACCEPTED
+        );
+//        throw new RuntimeException("Something went Wrong!!");
     }
 
     @GetMapping("")
