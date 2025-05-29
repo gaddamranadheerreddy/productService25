@@ -1,6 +1,7 @@
 package com.scalar.producrservice25.Controllers;
 
 import com.scalar.producrservice25.Models.Product;
+import com.scalar.producrservice25.exceptions.ProductNotFoundException;
 import com.scalar.producrservice25.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -19,12 +20,29 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
-        Product product = productService.getSingleProduct(id);
+//        Product product = productService.getSingleProduct(id);
 
-        return new ResponseEntity<>(
-                product,
-                HttpStatus.FOUND//.NOT_FOUND //.ACCEPTED
-        );
+//        return new ResponseEntity<>(
+//                product,
+//                HttpStatus.OK //.FOUND//.NOT_FOUND //.ACCEPTED
+//        );
+
+        ResponseEntity<Product> responseEntity = null;
+        try{
+            Product product = productService.getSingleProduct(id);
+            responseEntity = new  ResponseEntity<>(
+                    product,
+                    HttpStatus.OK
+            );
+        }
+        catch(ProductNotFoundException e){
+            System.out.println(e.getMessage());
+            responseEntity = new  ResponseEntity<>(
+                    null,
+                    HttpStatus.NOT_FOUND
+            );
+        }
+        return responseEntity;
 //        throw new RuntimeException("Something went Wrong!!");
     }
 
