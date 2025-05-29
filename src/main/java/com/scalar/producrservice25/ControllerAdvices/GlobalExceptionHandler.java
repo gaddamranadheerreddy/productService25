@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> handleProductNotFoundException(){
+    public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException ex) {
         return new ResponseEntity<>(
-                "Product with given id doesn't exists",
+               // "Product with given id doesn't exists",
+                ex.getMessage(),
                 HttpStatus.BAD_REQUEST
         );
     }
