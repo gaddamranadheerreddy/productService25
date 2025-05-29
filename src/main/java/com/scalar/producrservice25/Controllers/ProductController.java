@@ -39,7 +39,7 @@ public class ProductController {
             System.out.println(e.getMessage());
             responseEntity = new  ResponseEntity<>(
                     null,
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.BAD_REQUEST//.NOT_FOUND
             );
         }
         return responseEntity;
