@@ -2,6 +2,9 @@ package com.scalar.producrservice25.Controllers;
 
 import com.scalar.producrservice25.Models.Product;
 import com.scalar.producrservice25.services.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +18,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
-        return productService.getSingleProduct(id);
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
+        Product product = productService.getSingleProduct(id);
+
+        return new ResponseEntity<>(
+                product,
+                HttpStatus.FOUND//.NOT_FOUND //.ACCEPTED
+        );
     }
 
     @GetMapping("")
