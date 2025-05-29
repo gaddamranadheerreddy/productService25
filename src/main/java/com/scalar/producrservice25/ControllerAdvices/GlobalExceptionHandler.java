@@ -12,8 +12,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException ex) {
         return new ResponseEntity<>(
-               // "Product with given id doesn't exists",
-                ex.getMessage(),
+                "Product with given id doesn't exists",
+//                ex.getMessage(),
                 HttpStatus.BAD_REQUEST
         );
     }

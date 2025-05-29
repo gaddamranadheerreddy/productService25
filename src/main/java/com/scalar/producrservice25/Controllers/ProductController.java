@@ -70,4 +70,12 @@ public class ProductController {
     public void deleteProduct(@PathVariable("id") Long id) {
 
     }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException pe){
+        return new ResponseEntity<>(
+                pe.getMessage(),
+                HttpStatus.NOT_FOUND
+        );
+    }
 }
