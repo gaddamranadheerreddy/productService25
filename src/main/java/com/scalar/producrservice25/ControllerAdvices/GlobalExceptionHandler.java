@@ -22,4 +22,9 @@ public class GlobalExceptionHandler {
     public void handleIndexOutOfBoundException(){
 
     }
+
+    @ExceptionHandler(Exception.class)
+    public void handleException() {
+
+    }
 }
