@@ -54,22 +54,27 @@ public class ProductController {
 
     @PostMapping("")
     public Product createProduct(@RequestBody Product product) {
-        return null;
+        return productService.createProduct(product);
     }
 
     @PatchMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") Long id,@RequestBody Product product) {
-        return null;
+    public Product updateProduct(@PathVariable("id") Long id,@RequestBody Product product) throws ProductNotFoundException {
+        return productService.updateProduct(id, product);
     }
 
     @PutMapping("/{id}")
-    public Product replaceProduct(@PathVariable("id") Long id,@RequestBody Product product) {
-        return null;
+    public Product replaceProduct(@PathVariable("id") Long id,@RequestBody Product product)
+            throws ProductNotFoundException {
+        return productService.replaceProduct(id, product);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable("id") Long id) {
+    public void deleteProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
+        productService.deleteProduct(id);
 
+        //to get the output as product -> deleted product
+        //output type of this method should be Product
+        //return productService.deleteProduct(id);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)

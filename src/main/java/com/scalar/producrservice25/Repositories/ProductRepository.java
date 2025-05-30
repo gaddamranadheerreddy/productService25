@@ -23,4 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findByCategory(Category category);
 
     Optional<Product> findByCategory_Id(Long id);
+
+    @Override
+    Product save(Product product);
 }

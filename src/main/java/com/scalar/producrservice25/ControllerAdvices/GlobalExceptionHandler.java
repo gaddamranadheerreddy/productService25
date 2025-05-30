@@ -23,8 +23,11 @@ public class GlobalExceptionHandler {
 
     }
 
-    @ExceptionHandler(Exception.class)
-    public void handleException() {
-
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<String> handleException() {
+//        return new ResponseEntity<>(
+//                "Hey Dude, sonething went wrong. Kindly check your code!!",
+//                HttpStatus.EXPECTATION_FAILED
+//        );
+//    }
 }
