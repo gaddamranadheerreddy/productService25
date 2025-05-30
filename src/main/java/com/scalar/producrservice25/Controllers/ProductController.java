@@ -3,6 +3,7 @@ package com.scalar.producrservice25.Controllers;
 import com.scalar.producrservice25.Models.Product;
 import com.scalar.producrservice25.exceptions.ProductNotFoundException;
 import com.scalar.producrservice25.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     ProductService productService;
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfproductservice") ProductService productService) {
         this.productService = productService;
     }
 
