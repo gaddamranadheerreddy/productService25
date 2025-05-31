@@ -44,20 +44,20 @@ public class SelfProductService implements ProductService {
         // -> If category is already present in the DB or not.
         //If present -> then good.
         //else -> we'll have to save the category first in the DB.
-//        Category category = product.getCategory();
-//
-//        Optional<Category> optionalcategory = categoryRepository.findByName(category.getName());
-//        if(optionalcategory.isEmpty()){
-//            //save the category
-//            category = categoryRepository.save(category);
-//
-//        }
-//        else{
-//            //If categoryName is present -> get the complete category (id,name,...)
-//            category = optionalcategory.get(); //getting the id of the category from Catagory (categories) table
-//        }
-//
-//        product.setCategory(category); //setting the cat attributes ->along with the id of new category
+        Category category = product.getCategory();
+
+        Optional<Category> optionalcategory = categoryRepository.findByName(category.getName());
+        if(optionalcategory.isEmpty()){
+            //save the category
+            category = categoryRepository.save(category);
+
+        }
+        else{
+            //If categoryName is present -> get the complete category (id,name,...)
+            category = optionalcategory.get(); //getting the id of the category from Catagory (categories) table
+        }
+
+        product.setCategory(category); //setting the cat attributes ->along with the id of new category
         return productRepository.save(product);
     }
 

@@ -2,6 +2,7 @@ package com.scalar.producrservice25.Models;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,5 +17,6 @@ public class Product extends BaseModel {
     private double price;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Category category;
+    //can set this to LAZY by fetch = FetchType.LAZY in the above line after cascade.
+    private Category category; //By default, the fetch type is EAGER for Non-Collection Types.
 }
