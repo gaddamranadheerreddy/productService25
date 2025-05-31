@@ -33,14 +33,3 @@ class ProducrService25ApplicationTests {
 //    }
 
 }
-git commit -m "Modified the code. Now the application was running successfully.
-When started today -> it gave error -> Lonmob related error -> cannot get the getter and setters .
-        -> first changed the lombok dependency to the one as present in the deepakkasera github pom.xml file
--> Not worked.
-        -> Reverted back to the original one -> As before (Like Yesterday).
-        -> Its working now.
-Dont now how Lombok is working -> Always Confusing..git commit -m "Modified the code. Now the application was running successfully.
-When started today -> it gave error -> Lonmob related error -> cannot get the getter and setters .
-        -> first changed the lombok dependency to the one as present in the deepakkasera github pom.xml file
--> Not worked.
-        -> Its working now. "he original one -> As before (Like Yesterday).
