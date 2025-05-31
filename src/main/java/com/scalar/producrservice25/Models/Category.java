@@ -1,5 +1,6 @@
 package com.scalar.producrservice25.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -14,5 +15,6 @@ public class Category extends BaseModel {
     private String name;
 
     @OneToMany(mappedBy = "category") //This mappedBy -> can only be present in  OneToMany side.
+    @JsonIgnore //Telling spring to ignore this attribute.
     List<Product> products;
 }
