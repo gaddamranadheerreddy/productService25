@@ -23,12 +23,12 @@ class ProducrService25ApplicationTests {
     @Test
     void contextLoads() {
         //By default -> EAGER
-        Optional<Product> optionalProduct = productRepository.findById(1L);
-        System.out.println(optionalProduct.get().getTitle());
+//        Optional<Product> optionalProduct = productRepository.findById(1L);
+//        System.out.println(optionalProduct.get().getTitle());
 
         //By default -> LAZY
-        Optional<Category> optionalCategory = categoryRepository.findById(1L);
-        System.out.println(optionalCategory.get().getName());
+//        Optional<Category> optionalCategory = categoryRepository.findById(1L);
+//        System.out.println(optionalCategory.get().getName());
     }
 
 //    @Test

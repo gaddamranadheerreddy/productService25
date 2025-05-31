@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity(name = "categories")
 public class Category extends BaseModel {
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}) //This mappedBy -> can only be present in  OneToMany side.
