@@ -3,6 +3,9 @@ package com.scalar.producrservice25.Repositories;
 import com.scalar.producrservice25.Models.Category;
 import com.scalar.producrservice25.Models.Product;
 import com.scalar.producrservice25.Projections.ProductWithTitleAndPrice;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,6 +21,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Override
     List<Product> findAll();
+
+    @Override
+    Page<Product> findAll(Pageable pageable);
 
     Optional<Product> findByTitleContains(String str);
     //select * from products where tile like '%str%';

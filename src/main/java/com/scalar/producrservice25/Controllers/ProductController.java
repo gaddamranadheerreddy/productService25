@@ -4,6 +4,7 @@ import com.scalar.producrservice25.Models.Product;
 import com.scalar.producrservice25.exceptions.ProductNotFoundException;
 import com.scalar.producrservice25.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -48,9 +49,11 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize){
+        return productService.getAllProducts(pageNumber, pageSize);
     }
+    // the url in postman looks like this -> localhost:8484/products?pageNumber=0&pageSize=2
+    //Here ? -> is Query Parameter.
 
     @PostMapping("")
     public Product createProduct(@RequestBody Product product) {

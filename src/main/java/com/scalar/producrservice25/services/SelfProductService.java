@@ -5,6 +5,9 @@ import com.scalar.producrservice25.Models.Product;
 import com.scalar.producrservice25.Repositories.CategoryRepository;
 import com.scalar.producrservice25.Repositories.ProductRepository;
 import com.scalar.producrservice25.exceptions.ProductNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,10 +36,19 @@ public class SelfProductService implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        return products;
+    public Page<Product> getAllProducts(int pageNumber, int pageSize) {
+        Sort sort = Sort.by("price").descending().and(Sort.by("title").ascending());
+        return productRepository.findAll(
+//                PageRequest.of(pageNumber, pageSize, Sort.by("price").descending())
+                PageRequest.of(pageNumber, pageSize, sort)
+        );
     }
+
+//    @Override
+//    public List<Product> getAllProducts() {
+//        List<Product> products = productRepository.findAll();
+//        return products;
+//    }
 
     @Override
     public Product createProduct(Product product) {
@@ -112,6 +124,7 @@ public class SelfProductService implements ProductService {
         Product productfromDB = optionalproduct.get();
         //lets change/modify only the description.
         productfromDB.setDescription(product.getDescription());
+        productfromDB.setPrice(product.getPrice());
         return productRepository.save(productfromDB);
     }
 }
