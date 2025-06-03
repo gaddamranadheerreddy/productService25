@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
     Product getSingleProduct(Long id) throws ProductNotFoundException;
-//    List<Product> getAllProducts();
+    List<Product> getAllProducts();
     Page<Product> getAllProducts(int pageNumber, int pageSize);
     Product createProduct(Product product);
     Product replaceProduct(Long id, Product product) throws ProductNotFoundException;

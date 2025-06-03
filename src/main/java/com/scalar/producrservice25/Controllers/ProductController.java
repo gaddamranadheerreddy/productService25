@@ -48,12 +48,17 @@ public class ProductController {
 //        throw new RuntimeException("Something went Wrong!!");
     }
 
-    @GetMapping("")
+    @GetMapping("/pagination")
     public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize){
         return productService.getAllProducts(pageNumber, pageSize);
     }
     // the url in postman looks like this -> localhost:8484/products?pageNumber=0&pageSize=2
     //Here ? -> is Query Parameter.
+
+    @GetMapping("")
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
+    }
 
     @PostMapping("")
     public Product createProduct(@RequestBody Product product) {

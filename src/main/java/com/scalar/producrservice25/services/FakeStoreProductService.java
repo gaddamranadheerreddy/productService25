@@ -6,6 +6,8 @@ import com.scalar.producrservice25.dtos.FakeStoreProductDto;
 import com.scalar.producrservice25.exceptions.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -48,13 +50,13 @@ public class FakeStoreProductService implements ProductService {
     public Product getSingleProduct(Long id) throws ProductNotFoundException {
 
         //First check in the Redis (Cache) -> If the Product with given id is present or not.
-        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCT_"+id);
-        //cache HIT -> Found product info int the cache
-        if(product != null) {
-            return product;
-        }
+//        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCT_"+id);
+//        //cache HIT -> Found product info int the cache
+//        if(product != null) {
+//            return product;
+//        }
 
-        //Cache HIT -> The product info with given order=_id is not there in cache
+        //Cache MISS -> The product info with given order=_id is not there in cache
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/"+id,
                 FakeStoreProductDto.class
@@ -64,10 +66,10 @@ public class FakeStoreProductService implements ProductService {
             throw new ProductNotFoundException("Product with id: " + id + " doesn't exist!");
         }
 
-        product = convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+        Product product = convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
 
         //Now store this product in cache before returning to FE(Client)
-        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCT_"+id, product);
+//        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCT_"+id, product);
         return product;
     }
 
@@ -81,21 +83,22 @@ public class FakeStoreProductService implements ProductService {
         for(FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
             products.add(convertFakeStoreProductDtoToProduct(fakeStoreProductDto));
         }
+
         return new PageImpl<>(products);
     }
 
-//    @Override
-//    public List<Product> getAllProducts() {
-//        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject(
-//                "https://fakestoreapi.com/products",
-//                FakeStoreProductDto[].class
-//        );
-//        List<Product> products = new ArrayList<>();
-//        for(FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
-//            products.add(convertFakeStoreProductDtoToProduct(fakeStoreProductDto));
-//        }
-//        return products;
-//    }
+    @Override
+    public List<Product> getAllProducts() {
+        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject(
+                "https://fakestoreapi.com/products",
+                FakeStoreProductDto[].class
+        );
+        List<Product> products = new ArrayList<>();
+        for(FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
+            products.add(convertFakeStoreProductDtoToProduct(fakeStoreProductDto));
+        }
+        return products;
+    }
 
     @Override
     public Product createProduct(Product product) {

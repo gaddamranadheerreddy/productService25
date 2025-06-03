@@ -44,11 +44,11 @@ public class SelfProductService implements ProductService {
         );
     }
 
-//    @Override
-//    public List<Product> getAllProducts() {
-//        List<Product> products = productRepository.findAll();
-//        return products;
-//    }
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return products;
+    }
 
     @Override
     public Product createProduct(Product product) {
